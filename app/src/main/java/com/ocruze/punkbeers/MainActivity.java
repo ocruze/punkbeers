@@ -2,24 +2,22 @@ package com.ocruze.punkbeers;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -28,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Snackbar.make(view, "Next button action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -59,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Util.showToast(getApplicationContext(), "Clicked on settings");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 }

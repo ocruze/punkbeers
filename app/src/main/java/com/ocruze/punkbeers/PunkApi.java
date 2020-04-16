@@ -1,5 +1,7 @@
 package com.ocruze.punkbeers;
 
+import com.ocruze.punkbeers.beer.Beer;
+
 import java.util.List;
 
 import retrofit2.Call;
