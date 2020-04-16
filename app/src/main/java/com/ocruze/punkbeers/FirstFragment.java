@@ -36,7 +36,7 @@ public class FirstFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_first, container, false);
 
 
-        makeApiCall();
+        makeApiCall(1);
 
 
         return v;
@@ -68,7 +68,7 @@ public class FirstFragment extends Fragment {
         recyclerView.setAdapter(beerListAdapter);
     }
 
-    private void makeApiCall() {
+    private void makeApiCall(int page) {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -80,7 +80,7 @@ public class FirstFragment extends Fragment {
 
         PunkApi punkApi = retrofit.create(PunkApi.class);
 
-        Call<List<Beer>> call = punkApi.getBeers();
+        Call<List<Beer>> call = punkApi.getBeers(page);
         call.enqueue(new Callback<List<Beer>>() {
             @Override
             public void onResponse(Call<List<Beer>> call, Response<List<Beer>> response) {

@@ -9,4 +9,11 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="place_holder_text">Lorem ipsum</string>
+    <string name="place_holder_text_long">orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="label_beer_abv">ABV</string>
+    <string name="label_beer_ibu">IBU</string>
+    <string name="label_beer_ebc">EBC</string>
+    <string name="label_beer_srm">SRM</string>
 </resources>
