@@ -1,13 +1,18 @@
 package com.ocruze.punkbeers;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.InputStream;
 import java.util.List;
 
 public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHolder> {
@@ -18,12 +23,14 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         TextView txtHeader;
         TextView txtFooter;
         View layout;
+        ImageView icon;
 
         ViewHolder(View v) {
             super(v);
             layout = v;
-            txtHeader = (TextView) v.findViewById(R.id.firstLine);
-            txtFooter = (TextView) v.findViewById(R.id.secondLine);
+            txtHeader = v.findViewById(R.id.beer_name);
+            txtFooter = v.findViewById(R.id.beer_tagline);
+            icon = v.findViewById(R.id.icon);
         }
     }
 
@@ -59,8 +66,9 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final String name = beers.get(position).getName();
-        holder.txtHeader.setText(name);
+        final Beer beer = beers.get(position);
+
+        holder.txtHeader.setText(beer.getName());
         holder.txtHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +76,10 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
             }
         });
 
-        holder.txtFooter.setText("Footer: " + name);
+        holder.txtFooter.setText(beer.getTagline());
+        // holder.icon.setImageDrawable(getIconFromUrl(beer.getImageUrl()));
+        new DownloadImageFromInternet(holder.icon).execute(beer.getImageUrl());
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -77,4 +88,30 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         return beers.size();
     }
 
+
+    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
+        ImageView imageView;
+
+        public DownloadImageFromInternet(ImageView imageView) {
+            this.imageView = imageView;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String imageURL = urls[0];
+            Bitmap bimage = null;
+            try {
+                InputStream in = new java.net.URL(imageURL).openStream();
+                bimage = BitmapFactory.decodeStream(in);
+
+            } catch (Exception e) {
+                System.out.println("Error Message : " + e.getMessage());
+                e.printStackTrace();
+            }
+            return bimage;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            imageView.setImageBitmap(result);
+        }
+    }
 }
