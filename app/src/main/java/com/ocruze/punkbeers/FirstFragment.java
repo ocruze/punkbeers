@@ -7,11 +7,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.ocruze.punkbeers.beer.Beer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,22 +24,22 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FirstFragment extends Fragment {
+public class FirstFragment extends Fragment implements BeerListAdapter.OnItemListener {
 
     private RecyclerView recyclerView;
     private BeerListAdapter beerListAdapter;
     private RecyclerView.LayoutManager layoutManager;
-
     private View v;
+
+    private int page;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_first, container, false);
+        page = 1;
 
-
-        makeApiCall(1);
-
+        makeApiCall(page);
 
         return v;
     }
@@ -64,7 +66,7 @@ public class FirstFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         List<String> input = new ArrayList<>();
 
-        beerListAdapter = new BeerListAdapter(beers);
+        beerListAdapter = new BeerListAdapter(beers, this);
         recyclerView.setAdapter(beerListAdapter);
     }
 
@@ -87,7 +89,7 @@ public class FirstFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Beer> beers = response.body();
                     Util.showToast(getActivity().getApplicationContext(), "API Success : " + response.code());
-                    System.out.println(beers);
+
                     showList(beers);
                 } else {
 
@@ -103,4 +105,14 @@ public class FirstFragment extends Fragment {
     }
 
 
+    @Override
+    public void onItemClick(int position) {
+        Util.showToast(getActivity().getApplicationContext(), position + "");
+
+        /*Bundle bundle = new Bundle();
+        bundle.put
+         */
+        NavHostFragment.findNavController(FirstFragment.this)
+                .navigate(R.id.action_FirstFragment_to_SecondFragment);// bundle
+    }
 }
