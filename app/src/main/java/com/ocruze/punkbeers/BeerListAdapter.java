@@ -1,5 +1,6 @@
 package com.ocruze.punkbeers;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ocruze.punkbeers.beer.Beer;
 
 import java.io.InputStream;
@@ -22,9 +24,13 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
 
     private OnItemListener onItemListener;
 
-    public BeerListAdapter(List<Beer> beers, OnItemListener onItemListener) {
+    private Context context;
+
+    public BeerListAdapter(List<Beer> beers, OnItemListener onItemListener, Context context) {
         this.beers = beers;
         this.onItemListener = onItemListener;
+        this.context = context;
+
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -56,6 +62,7 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
 
             this.onItemListener = onItemListener;
             v.setOnClickListener(this);
+
         }
 
         @Override
@@ -107,12 +114,22 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
 
         holder.txtBeerTagline.setText(beer.getTagline());
         // holder.icon.setImageDrawable(getIconFromUrl(beer.getImageUrl()));
-        new DownloadImageFromInternet(holder.icon).execute(beer.getImageUrl());
 
+        // new DownloadImageFromInternet(holder.icon).execute(beer.getImageUrl());
         holder.txtBeerAbv.setText(beer.getAbv() + "%");
         holder.txtBeerIbu.setText(beer.getIbu() + "");
         holder.txtBeerEbc.setText(beer.getEbc() + "");
         holder.txtBeerSrm.setText(beer.getSrm() + "");
+
+        //System.out.println(getApplicationContext());
+
+        Glide
+                .with(this.context)
+                .load(beer.getImageUrl())
+                .into(holder.icon);
+
+        System.out.println("volume = " + beer.getVolume());
+        System.out.println("boil volume = " + beer.getBoilVolume());
     }
 
     @Override
