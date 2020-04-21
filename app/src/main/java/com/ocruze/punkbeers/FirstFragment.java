@@ -66,8 +66,10 @@ public class FirstFragment extends Fragment implements BeerListAdapter.OnItemLis
         recyclerView.setLayoutManager(layoutManager);
         List<String> input = new ArrayList<>();
 
-        beerListAdapter = new BeerListAdapter(beers, this);
+        beerListAdapter = new BeerListAdapter(beers, this, getActivity().getApplicationContext());
         recyclerView.setAdapter(beerListAdapter);
+
+        System.out.println(getActivity().getApplicationContext());
     }
 
     private void makeApiCall(int page) {

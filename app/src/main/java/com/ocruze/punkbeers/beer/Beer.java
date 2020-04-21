@@ -2,6 +2,8 @@ package com.ocruze.punkbeers.beer;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Beer {
     private int id;
     private String name;
@@ -21,7 +23,18 @@ public class Beer {
     @SerializedName("boil_volume")
     private Quantity boilVolume;
 
+    private Method method;
 
+    private Ingredients ingredients;
+
+    @SerializedName("food_pairing")
+    private List<String> foodPairing;
+
+    @SerializedName("brewers_tips")
+    private String brewersTips;
+
+    @SerializedName("contributed_by")
+    private String contributedBy;
 
     public int getId() {
         return id;
@@ -29,10 +42,6 @@ public class Beer {
 
     public String getName() {
         return name;
-    }
-
-    public String toString() {
-        return id + ", " + name;
     }
 
     public String getTagline() {
@@ -62,4 +71,16 @@ public class Beer {
     public double getSrm() {
         return srm;
     }
+
+    public Quantity getVolume() {
+        return volume;
+    }
+
+    public Quantity getBoilVolume() {
+        return boilVolume;
+    }
+
+
 }
+
+
