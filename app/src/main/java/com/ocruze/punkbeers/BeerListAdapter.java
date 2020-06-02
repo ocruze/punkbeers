@@ -67,12 +67,12 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            onItemListener.onItemClick(getAdapterPosition());
+            onItemListener.onItemClick(beers.get(getAdapterPosition()));
         }
     }
 
     public interface OnItemListener {
-        void onItemClick(int position);
+        void onItemClick(Beer beer);
     }
 
     public void add(int position, Beer item) {
@@ -121,15 +121,10 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         holder.txtBeerEbc.setText(beer.getEbc() + "");
         holder.txtBeerSrm.setText(beer.getSrm() + "");
 
-        //System.out.println(getApplicationContext());
-
         Glide
                 .with(this.context)
                 .load(beer.getImageUrl())
                 .into(holder.icon);
-
-        System.out.println("volume = " + beer.getVolume());
-        System.out.println("boil volume = " + beer.getBoilVolume());
     }
 
     @Override
@@ -137,30 +132,4 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         return beers.size();
     }
 
-
-    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
-        ImageView imageView;
-
-        public DownloadImageFromInternet(ImageView imageView) {
-            this.imageView = imageView;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String imageURL = urls[0];
-            Bitmap bimage = null;
-            try {
-                InputStream in = new java.net.URL(imageURL).openStream();
-                bimage = BitmapFactory.decodeStream(in);
-
-            } catch (Exception e) {
-                System.out.println("Error Message : " + e.getMessage());
-                e.printStackTrace();
-            }
-            return bimage;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            imageView.setImageBitmap(result);
-        }
-    }
 }
