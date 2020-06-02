@@ -1,9 +1,6 @@
-package com.ocruze.punkbeers;
+package com.ocruze.punkbeers.presentation.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.ocruze.punkbeers.beer.Beer;
+import com.ocruze.punkbeers.R;
+import com.ocruze.punkbeers.presentation.model.beer.Beer;
 
-import java.io.InputStream;
 import java.util.List;
 
 public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHolder> {

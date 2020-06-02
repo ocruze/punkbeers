@@ -1,7 +1,6 @@
-package com.ocruze.punkbeers;
+package com.ocruze.punkbeers.presentation.view;
 
 import android.annotation.SuppressLint;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +11,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.ocruze.punkbeers.R;
+import com.ocruze.punkbeers.presentation.model.Util;
 
 public class MainActivity extends AppCompatActivity {
 

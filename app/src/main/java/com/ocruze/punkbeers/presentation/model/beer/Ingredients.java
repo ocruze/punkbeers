@@ -1,4 +1,4 @@
-package com.ocruze.punkbeers.beer;
+package com.ocruze.punkbeers.presentation.model.beer;
 
 import java.util.List;
 

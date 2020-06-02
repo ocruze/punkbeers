@@ -1,4 +1,4 @@
-package com.ocruze.punkbeers;
+package com.ocruze.punkbeers.presentation.model;
 
 import android.content.Context;
 import android.widget.Toast;

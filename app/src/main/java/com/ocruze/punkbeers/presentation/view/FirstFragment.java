@@ -1,4 +1,4 @@
-package com.ocruze.punkbeers;
+package com.ocruze.punkbeers.presentation.view;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,7 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.ocruze.punkbeers.beer.Beer;
+import com.ocruze.punkbeers.R;
+import com.ocruze.punkbeers.presentation.model.Util;
+import com.ocruze.punkbeers.data.PunkApi;
+import com.ocruze.punkbeers.presentation.model.Constants;
+import com.ocruze.punkbeers.presentation.model.beer.Beer;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
