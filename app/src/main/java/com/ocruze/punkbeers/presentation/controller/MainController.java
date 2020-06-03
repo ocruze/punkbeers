@@ -8,8 +8,8 @@ import android.os.Bundle;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.ocruze.punkbeers.data.PunkApi;
-import com.ocruze.punkbeers.presentation.model.Constants;
+import com.ocruze.punkbeers.presentation.Singletons;
+import com.ocruze.punkbeers.presentation.Constants;
 import com.ocruze.punkbeers.presentation.model.Util;
 import com.ocruze.punkbeers.presentation.model.beer.Beer;
 import com.ocruze.punkbeers.presentation.view.MainActivity;
@@ -20,8 +20,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainController {
 
@@ -48,14 +46,9 @@ public class MainController {
     }
 
     private void makeApiCall(int page) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(PunkApi.BASE_URI)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
 
-        PunkApi punkApi = retrofit.create(PunkApi.class);
 
-        Call<List<Beer>> call = punkApi.getBeers(page);
+        Call<List<Beer>> call = Singletons.getPunkApi().getBeers(page);
         call.enqueue(new Callback<List<Beer>>() {
             @Override
             public void onResponse(Call<List<Beer>> call, Response<List<Beer>> response) {

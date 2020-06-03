@@ -1,4 +1,4 @@
-package com.ocruze.punkbeers.presentation.model;
+package com.ocruze.punkbeers.presentation;
 
 public class Constants {
     public final static String APP_PREFS_KEY = "app_punk_beers";

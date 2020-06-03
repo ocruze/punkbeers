@@ -1,8 +1,6 @@
 package com.ocruze.punkbeers.presentation.view;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,11 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.ocruze.punkbeers.R;
+import com.ocruze.punkbeers.presentation.Singletons;
 import com.ocruze.punkbeers.presentation.controller.MainController;
-import com.ocruze.punkbeers.presentation.model.Constants;
 import com.ocruze.punkbeers.presentation.model.Util;
 import com.ocruze.punkbeers.presentation.model.beer.Beer;
 
@@ -64,13 +60,7 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         });
 
         // non-view related
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constants.APP_PREFS_KEY, Context.MODE_PRIVATE);
-        Gson gson = new GsonBuilder()
-                //.registerTypeAdapter(Beer.class, new BeerTypeAdapter())
-                .setLenient()
-                .create();
-
-        controller = new MainController(this, sharedPreferences, gson);
+        controller = new MainController(this, Singletons.getSharedPreferences(this), Singletons.getGson());
         controller.onStart();
     }
 
