@@ -108,6 +108,8 @@ public class MainController {
     }
 
     public void onItemClick(Beer beer) {
+        view.navigateToDetails(beer);
+
         String jsonBeer = gson.toJson(beer, Beer.class);
         System.out.println("first : " + jsonBeer);
         Bundle bundle = new Bundle();

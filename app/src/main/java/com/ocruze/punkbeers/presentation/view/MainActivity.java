@@ -1,6 +1,7 @@
 package com.ocruze.punkbeers.presentation.view;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,15 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.ocruze.punkbeers.R;
+import com.ocruze.punkbeers.presentation.Constants;
 import com.ocruze.punkbeers.presentation.Singletons;
 import com.ocruze.punkbeers.presentation.controller.MainController;
 import com.ocruze.punkbeers.presentation.model.Util;
 import com.ocruze.punkbeers.presentation.model.beer.Beer;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements BeerListAdapter.OnItemListener {
+public class MainActivity extends AppCompatActivity implements BeerListAdapter.OnItemClickListener {
 
     private RecyclerView recyclerView;
     private BeerListAdapter beerListAdapter;
@@ -70,13 +71,10 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
 
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
-        List<String> input = new ArrayList<>();
 
         beerListAdapter = new BeerListAdapter(beers, this, getApplicationContext());
         recyclerView.setAdapter(beerListAdapter);
-
     }
-
 
     @Override
     public void onItemClick(Beer beer) {
@@ -106,4 +104,11 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         return super.onOptionsItemSelected(item);
     }
 
+    public void navigateToDetails(Beer beer) {
+        String jsonBeer = Singletons.getGson().toJson(beer, Beer.class);
+
+        Intent detailsIntent = new Intent(this, DetailsActivity.class);
+        detailsIntent.putExtra(Constants.CURRENT_BEER, jsonBeer);
+        this.startActivity(detailsIntent);
+    }
 }

@@ -8,7 +8,7 @@
         android:layout_width="@dimen/beer_page_img_width"
         android:layout_height="@dimen/beer_page_img_height"
         android:layout_gravity="center_vertical"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/desc_beer_image"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
