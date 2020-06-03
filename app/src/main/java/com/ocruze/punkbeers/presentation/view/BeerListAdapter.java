@@ -110,9 +110,7 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         });
 
         holder.txtBeerTagline.setText(beer.getTagline());
-        // holder.icon.setImageDrawable(getIconFromUrl(beer.getImageUrl()));
 
-        // new DownloadImageFromInternet(holder.icon).execute(beer.getImageUrl());
         holder.txtBeerAbv.setText(beer.getAbv() + "%");
         holder.txtBeerIbu.setText(beer.getIbu() + "");
         holder.txtBeerEbc.setText(beer.getEbc() + "");
