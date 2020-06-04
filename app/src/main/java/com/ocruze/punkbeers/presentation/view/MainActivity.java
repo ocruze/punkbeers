@@ -2,6 +2,7 @@ package com.ocruze.punkbeers.presentation.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,8 +67,15 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         controller.onStart();
     }
 
+    public void gradientAnimation(ConstraintLayout layout) {
+        AnimationDrawable animationDrawable = (AnimationDrawable) layout.getBackground();
+        animationDrawable.setEnterFadeDuration(4500);
+        animationDrawable.setExitFadeDuration(4500);
+        animationDrawable.start();
+    }
+
     public void showList(List<Beer> beers) {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -79,6 +88,14 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
     @Override
     public void onItemClick(Beer beer) {
         controller.onItemClick(beer);
+    }
+
+    public void navigateToDetails(Beer beer) {
+        String jsonBeer = Singletons.getGson().toJson(beer, Beer.class);
+
+        Intent detailsIntent = new Intent(this, DetailsActivity.class);
+        detailsIntent.putExtra(Constants.CURRENT_BEER, jsonBeer);
+        this.startActivity(detailsIntent);
     }
 
     @Override
@@ -104,11 +121,5 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         return super.onOptionsItemSelected(item);
     }
 
-    public void navigateToDetails(Beer beer) {
-        String jsonBeer = Singletons.getGson().toJson(beer, Beer.class);
 
-        Intent detailsIntent = new Intent(this, DetailsActivity.class);
-        detailsIntent.putExtra(Constants.CURRENT_BEER, jsonBeer);
-        this.startActivity(detailsIntent);
-    }
 }

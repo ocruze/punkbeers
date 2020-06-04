@@ -4,12 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.ocruze.punkbeers.presentation.Singletons;
 import com.ocruze.punkbeers.presentation.Constants;
+import com.ocruze.punkbeers.presentation.Singletons;
 import com.ocruze.punkbeers.presentation.model.Util;
 import com.ocruze.punkbeers.presentation.model.beer.Beer;
 import com.ocruze.punkbeers.presentation.view.MainActivity;
@@ -109,13 +108,6 @@ public class MainController {
 
     public void onItemClick(Beer beer) {
         view.navigateToDetails(beer);
-
-        String jsonBeer = gson.toJson(beer, Beer.class);
-        System.out.println("first : " + jsonBeer);
-        Bundle bundle = new Bundle();
-        bundle.putString("beer", jsonBeer);
-
-        // NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);// bundle
     }
 
     public void onButtonClick() {

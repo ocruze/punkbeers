@@ -31,6 +31,13 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void showBeerDetails(Beer beer) {
         beerName.setText(beer.getName());
-        Glide.with(getApplicationContext()).load(beer.getImageUrl()).into(beerImage);
+
+        if (!beer.getImageUrl().equals(Constants.DEFAULT_BEER_IMG_URL)) {
+            Glide
+                    .with(getApplicationContext())
+                    .load(beer.getImageUrl())
+                    .into(beerImage);
+        }
+
     }
 }

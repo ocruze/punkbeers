@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ocruze.punkbeers.R;
+import com.ocruze.punkbeers.presentation.Constants;
 import com.ocruze.punkbeers.presentation.model.beer.Beer;
 
 import java.util.List;
@@ -115,10 +116,12 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         holder.txtBeerEbc.setText(beer.getEbc() + "");
         holder.txtBeerSrm.setText(beer.getSrm() + "");
 
-        Glide
-                .with(this.context)
-                .load(beer.getImageUrl())
-                .into(holder.icon);
+        if (!beer.getImageUrl().equals(Constants.DEFAULT_BEER_IMG_URL)) {
+            Glide
+                    .with(this.context)
+                    .load(beer.getImageUrl())
+                    .into(holder.icon);
+        }
     }
 
     @Override
