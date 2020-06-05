@@ -1,6 +1,6 @@
-package com.ocruze.punkbeers;
+package com.ocruze.punkbeers.data;
 
-import com.ocruze.punkbeers.beer.Beer;
+import com.ocruze.punkbeers.presentation.model.beer.Beer;
 
 import java.util.List;
 

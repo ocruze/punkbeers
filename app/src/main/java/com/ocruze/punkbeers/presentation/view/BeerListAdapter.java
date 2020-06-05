@@ -1,9 +1,6 @@
-package com.ocruze.punkbeers;
+package com.ocruze.punkbeers.presentation.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +11,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.ocruze.punkbeers.beer.Beer;
+import com.ocruze.punkbeers.R;
+import com.ocruze.punkbeers.presentation.Constants;
+import com.ocruze.punkbeers.presentation.model.beer.Beer;
 
-import java.io.InputStream;
 import java.util.List;
 
 public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHolder> {
     private List<Beer> beers;
 
-    private OnItemListener onItemListener;
+    private OnItemClickListener onItemClickListener;
 
     private Context context;
 
-    public BeerListAdapter(List<Beer> beers, OnItemListener onItemListener, Context context) {
+    public BeerListAdapter(List<Beer> beers, OnItemClickListener onItemClickListener, Context context) {
         this.beers = beers;
-        this.onItemListener = onItemListener;
+        this.onItemClickListener = onItemClickListener;
         this.context = context;
 
     }
@@ -46,9 +44,9 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         TextView txtBeerSrm;
 
 
-        OnItemListener onItemListener;
+        OnItemClickListener onItemClickListener;
 
-        ViewHolder(View v, OnItemListener onItemListener) {
+        ViewHolder(View v, OnItemClickListener onItemClickListener) {
             super(v);
             layout = v;
             txtBeerName = v.findViewById(R.id.beer_name);
@@ -60,19 +58,18 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
             txtBeerEbc = v.findViewById(R.id.beer_ebc);
             txtBeerSrm = v.findViewById(R.id.beer_srm);
 
-            this.onItemListener = onItemListener;
+            this.onItemClickListener = onItemClickListener;
             v.setOnClickListener(this);
-
         }
 
         @Override
         public void onClick(View v) {
-            onItemListener.onItemClick(getAdapterPosition());
+            onItemClickListener.onItemClick(beers.get(getAdapterPosition()));
         }
     }
 
-    public interface OnItemListener {
-        void onItemClick(int position);
+    public interface OnItemClickListener {
+        void onItemClick(Beer beer);
     }
 
     public void add(int position, Beer item) {
@@ -93,7 +90,7 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.row_layout, parent, false);
         // set the view's size, margins, paddings and layout parameters
-        ViewHolder vh = new ViewHolder(v, onItemListener);
+        ViewHolder vh = new ViewHolder(v, onItemClickListener);
         return vh;
     }
 
@@ -113,23 +110,18 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         });
 
         holder.txtBeerTagline.setText(beer.getTagline());
-        // holder.icon.setImageDrawable(getIconFromUrl(beer.getImageUrl()));
 
-        // new DownloadImageFromInternet(holder.icon).execute(beer.getImageUrl());
         holder.txtBeerAbv.setText(beer.getAbv() + "%");
         holder.txtBeerIbu.setText(beer.getIbu() + "");
         holder.txtBeerEbc.setText(beer.getEbc() + "");
         holder.txtBeerSrm.setText(beer.getSrm() + "");
 
-        //System.out.println(getApplicationContext());
-
-        Glide
-                .with(this.context)
-                .load(beer.getImageUrl())
-                .into(holder.icon);
-
-        System.out.println("volume = " + beer.getVolume());
-        System.out.println("boil volume = " + beer.getBoilVolume());
+        if (!beer.getImageUrl().equals(Constants.DEFAULT_BEER_IMG_URL)) {
+            Glide
+                    .with(this.context)
+                    .load(beer.getImageUrl())
+                    .into(holder.icon);
+        }
     }
 
     @Override
@@ -137,30 +129,4 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         return beers.size();
     }
 
-
-    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
-        ImageView imageView;
-
-        public DownloadImageFromInternet(ImageView imageView) {
-            this.imageView = imageView;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String imageURL = urls[0];
-            Bitmap bimage = null;
-            try {
-                InputStream in = new java.net.URL(imageURL).openStream();
-                bimage = BitmapFactory.decodeStream(in);
-
-            } catch (Exception e) {
-                System.out.println("Error Message : " + e.getMessage());
-                e.printStackTrace();
-            }
-            return bimage;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            imageView.setImageBitmap(result);
-        }
-    }
 }

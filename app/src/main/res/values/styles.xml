@@ -6,6 +6,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textViewStyle">@style/LatoTextViewStyle</item>
+        <item name="android:textColor">@color/colorBlack</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,8 +19,31 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="FloatingButtonDimens">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">56dp</item>
+    </style>
+
+    <style name="BeerDetailLabel">
+        <item name="android:layout_width">66dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BeerDetailValue">
+        <item name="android:layout_width">66dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="LatoTextViewStyle">
+        <item name="android:fontFamily">@font/lato</item>
     </style>
 
 

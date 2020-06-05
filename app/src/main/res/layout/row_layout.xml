@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="180dp"
-    android:layout_margin="2dp"
-    android:background="@color/design_default_color_on_primary">
+    android:layout_margin="2dp">
 
     <ImageView
         android:id="@+id/icon"
@@ -14,7 +13,9 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="5dp"
         android:contentDescription="TODO"
-        android:src="@mipmap/ic_launcher" />
+        android:scaleType="centerInside"
+        android:src="@drawable/punk_beer_default"
+        android:outlineSpotShadowColor="@color/colorBlack"/>
 
     <TextView
         android:id="@+id/beer_name"
@@ -43,94 +44,63 @@
 
     <TextView
         android:id="@+id/label_beer_abv"
-        android:layout_width="@dimen/beer_detail_width"
-        android:layout_height="@dimen/beer_detail_height"
+        style="@style/BeerDetailLabel"
         android:layout_below="@+id/beer_tagline"
-        android:layout_margin="2dp"
         android:layout_toEndOf="@id/icon"
         android:gravity="center_vertical|end"
-        android:text="@string/label_beer_abv"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        android:text="@string/label_beer_abv" />
 
     <TextView
         android:id="@+id/beer_abv"
-        android:layout_width="@dimen/beer_detail_width"
-        android:layout_height="@dimen/beer_detail_height"
+        style="@style/BeerDetailValue"
         android:layout_below="@+id/beer_tagline"
-        android:layout_margin="2dp"
         android:layout_toEndOf="@id/label_beer_abv"
-        android:gravity="center_vertical|start"
-        android:padding="4dp"
-        android:textSize="14sp" />
+        android:gravity="center_vertical|start" />
 
     <TextView
         android:id="@+id/label_beer_ibu"
-        android:layout_width="@dimen/beer_detail_width"
-        android:layout_height="@dimen/beer_detail_height"
+        style="@style/BeerDetailLabel"
         android:layout_below="@+id/beer_tagline"
-        android:layout_margin="2dp"
         android:layout_toEndOf="@id/beer_abv"
         android:gravity="center_vertical|end"
-        android:text="@string/label_beer_ibu"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        android:text="@string/label_beer_ibu" />
 
     <TextView
         android:id="@+id/beer_ibu"
-        android:layout_width="@dimen/beer_detail_width"
-        android:layout_height="@dimen/beer_detail_height"
+        style="@style/BeerDetailValue"
         android:layout_below="@+id/beer_tagline"
-        android:layout_margin="2dp"
         android:layout_toEndOf="@id/label_beer_ibu"
-        android:gravity="center_vertical|start"
-        android:padding="4dp"
-        android:textSize="14sp" />
+        android:gravity="center_vertical|start" />
 
     <TextView
         android:id="@+id/label_beer_ebc"
-        android:layout_width="@dimen/beer_detail_width"
-        android:layout_height="@dimen/beer_detail_height"
+        style="@style/BeerDetailLabel"
         android:layout_below="@+id/label_beer_abv"
-        android:layout_margin="2dp"
         android:layout_toEndOf="@id/icon"
         android:gravity="center_vertical|end"
-        android:text="@string/label_beer_ebc"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        android:text="@string/label_beer_ebc" />
 
     <TextView
         android:id="@+id/beer_ebc"
-        android:layout_width="@dimen/beer_detail_width"
-        android:layout_height="@dimen/beer_detail_height"
+        style="@style/BeerDetailValue"
         android:layout_below="@+id/beer_abv"
-        android:layout_margin="2dp"
         android:layout_toEndOf="@id/label_beer_ebc"
-        android:gravity="center_vertical|start"
-        android:padding="4dp"
-        android:textSize="14sp" />
+        android:gravity="center_vertical|start" />
 
     <TextView
         android:id="@+id/label_beer_srm"
-        android:layout_width="@dimen/beer_detail_width"
-        android:layout_height="@dimen/beer_detail_height"
+        style="@style/BeerDetailLabel"
         android:layout_below="@+id/label_beer_abv"
-        android:layout_margin="2dp"
         android:layout_toEndOf="@id/beer_ebc"
         android:gravity="center_vertical|end"
-        android:text="@string/label_beer_srm"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        android:text="@string/label_beer_srm" />
 
     <TextView
         android:id="@+id/beer_srm"
-        android:layout_width="@dimen/beer_detail_width"
-        android:layout_height="@dimen/beer_detail_height"
+        style="@style/BeerDetailValue"
         android:layout_below="@+id/beer_ibu"
-        android:layout_margin="2dp"
         android:layout_toEndOf="@id/label_beer_srm"
-        android:gravity="center_vertical|start"
-        android:padding="4dp"
+        android:gravity="center_vertical|start" />
 
-        android:textSize="14sp" />
+
 </RelativeLayout>
