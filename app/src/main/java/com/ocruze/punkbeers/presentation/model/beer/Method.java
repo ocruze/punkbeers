@@ -24,7 +24,9 @@ public class Method {
         return twist;
     }
 
-    class MashTemp {
+    public class MashTemp {
+
+        @SerializedName("temp")
         private Quantity temperature;
         private double duration;
 
@@ -37,7 +39,8 @@ public class Method {
         }
     }
 
-    class Fermentation {
+    public class Fermentation {
+        @SerializedName("temp")
         private Quantity temperature;
 
         public Quantity getTemperature() {
