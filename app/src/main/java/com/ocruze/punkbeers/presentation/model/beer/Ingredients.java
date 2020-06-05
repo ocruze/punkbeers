@@ -1,4 +1,4 @@
-package com.ocruze.punkbeers.beer;
+package com.ocruze.punkbeers.presentation.model.beer;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class Ingredients {
         return yeast;
     }
 
-    class Ingredient {
+    public class Ingredient {
         private String name;
         private Quantity amount;
 
@@ -32,7 +32,7 @@ public class Ingredients {
         }
     }
 
-    class Hop extends Ingredient {
+    public class Hop extends Ingredient {
         private String add;
         private String attribute;
 

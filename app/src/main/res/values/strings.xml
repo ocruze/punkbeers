@@ -16,4 +16,5 @@
     <string name="label_beer_ibu">IBU</string>
     <string name="label_beer_ebc">EBC</string>
     <string name="label_beer_srm">SRM</string>
+    <string name="desc_beer_image">Beer image</string>
 </resources>

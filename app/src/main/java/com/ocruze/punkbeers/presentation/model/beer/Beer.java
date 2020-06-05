@@ -1,4 +1,4 @@
-package com.ocruze.punkbeers.beer;
+package com.ocruze.punkbeers.presentation.model.beer;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -9,6 +9,9 @@ public class Beer {
     private String name;
     private String tagline;
     private String description;
+
+    @SerializedName("first_brewed")
+    private String firstBrewed;
 
     @SerializedName("image_url")
     private String imageUrl;
@@ -52,6 +55,10 @@ public class Beer {
         return description;
     }
 
+    public String getFirstBrewed() {
+        return firstBrewed;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -80,7 +87,25 @@ public class Beer {
         return boilVolume;
     }
 
+    public Method getMethod() {
+        return method;
+    }
 
+    public Ingredients getIngredients() {
+        return ingredients;
+    }
+
+    public List<String> getFoodPairing() {
+        return foodPairing;
+    }
+
+    public String getBrewersTips() {
+        return brewersTips;
+    }
+
+    public String getContributedBy() {
+        return contributedBy;
+    }
 }
 
 
