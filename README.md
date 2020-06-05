@@ -12,11 +12,11 @@ L'application est un répertoire de recettes de bières.
 * Java 8 (ou plus récent)
 
 ## Installation
-* Clôner le projet repo github : 
+* Importer le projet sur Android Studio depuis GitHub :
 ```
 https://github.com/ocruze/punkbeers.git
 ```
-* Se prendre un café ☕
+* Se prendre un café ☕ pendant que Gradle s'occupe de la compilation
 
 ## Consignes respectées
 * Clean Architecture & MVC
@@ -29,3 +29,4 @@ https://github.com/ocruze/punkbeers.git
 
 ## Fonctionnalités
 ### Ecran principal
+

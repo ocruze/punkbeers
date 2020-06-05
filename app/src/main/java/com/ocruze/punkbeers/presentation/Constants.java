@@ -8,4 +8,6 @@ public class Constants {
     public final static String CURRENT_BEER = "current_beer";
 
     public final static String DEFAULT_BEER_IMG_URL = "https://images.punkapi.com/v2/keg.png";
+
+    public final static int ANIMATION_DURATION = 2000;
 }

@@ -6,7 +6,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,8 +13,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.ocruze.punkbeers.R;
 import com.ocruze.punkbeers.presentation.Constants;
 import com.ocruze.punkbeers.presentation.Singletons;
@@ -43,24 +40,11 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton next = findViewById(R.id.btn_next);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Snackbar.make(view, "Next button action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        FloatingActionButton previous = findViewById(R.id.btn_previous);
-        previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Previous button action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        ConstraintLayout constraintLayout = findViewById(R.id.main_activity_layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground() ;
+        animationDrawable.setEnterFadeDuration(Constants.ANIMATION_DURATION);
+        animationDrawable.setExitFadeDuration(Constants.ANIMATION_DURATION);
+        animationDrawable.start();
 
         // non-view related
         controller = new MainController(this, Singletons.getGson(), Singletons.getPunkRepository(this));

@@ -1,5 +1,6 @@
 package com.ocruze.punkbeers.presentation.view;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 import com.ocruze.punkbeers.R;
@@ -39,6 +41,12 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_page);
+
+        ConstraintLayout constraintLayout = findViewById(R.id.details_activity_layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground() ;
+        animationDrawable.setEnterFadeDuration(Constants.ANIMATION_DURATION);
+        animationDrawable.setExitFadeDuration(Constants.ANIMATION_DURATION);
+        animationDrawable.start();
 
         name = findViewById(R.id.beer_name);
         image = findViewById(R.id.beer_image);
