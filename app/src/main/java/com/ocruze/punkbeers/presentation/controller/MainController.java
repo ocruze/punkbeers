@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.google.gson.Gson;
+import com.ocruze.punkbeers.data.PunkApi;
 import com.ocruze.punkbeers.data.PunkCallback;
 import com.ocruze.punkbeers.data.PunkRepository;
 import com.ocruze.punkbeers.presentation.model.Util;
@@ -17,7 +18,7 @@ public class MainController {
 
     private PunkRepository repository;
     private Gson gson;
-    private int page;
+    private int page = 1;
 
     private MainActivity view;
 
@@ -28,8 +29,6 @@ public class MainController {
     }
 
     public void onStart() {
-        page = 1;
-
         if (isConnectedToInternet()) {
             repository.getPunkResponse(new PunkCallback() {
                 @Override
@@ -61,7 +60,34 @@ public class MainController {
         view.navigateToDetails(beer);
     }
 
+    public void onBottomReached(int position) {
+        /*int currentPage = ((position + 1) % PunkApi.RESULTS_PER_PAGE) + 1;
+        System.out.println("bottom reached " + position);
+        System.out.println("current page " + currentPage);*/
+        if (page > PunkApi.MAXIMUM_PAGE) {
+            return;
+        }
+
+        page++;
+        if (isConnectedToInternet()) {
+            repository.getPunkResponse(new PunkCallback() {
+                @Override
+                public void onSuccess(List<Beer> beers) {
+                    // view.showList(beers);
+                    view.updateList(beers);
+                    repository.saveList(beers);
+                }
+
+                @Override
+                public void onFailure() {
+                    Util.showToast(view.getApplicationContext(), "API Error");
+                }
+            }, page);
+        }
+    }
+
     public void onButtonClick() {
 
     }
+
 }

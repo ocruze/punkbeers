@@ -11,6 +11,8 @@ import retrofit2.http.Query;
 
 public interface PunkApi {
     String BASE_URI = "https://api.punkapi.com/v2/";
+    int RESULTS_PER_PAGE = 25;
+    int MAXIMUM_PAGE = 5;
 
     @GET("beers/")
     Call<List<Beer>> getBeers();

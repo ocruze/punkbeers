@@ -19,16 +19,16 @@ import java.util.List;
 
 public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHolder> {
     private List<Beer> beers;
-
-    private OnItemClickListener onItemClickListener;
-
     private Context context;
 
-    public BeerListAdapter(List<Beer> beers, OnItemClickListener onItemClickListener, Context context) {
+    private OnItemClickListener onItemClickListener;
+    private OnBottomReachedListener onBottomReachedListener;
+
+    public BeerListAdapter(List<Beer> beers, OnItemClickListener onItemClickListener, OnBottomReachedListener onBottomReachedListener, Context context) {
         this.beers = beers;
         this.onItemClickListener = onItemClickListener;
         this.context = context;
-
+        this.onBottomReachedListener = onBottomReachedListener;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -72,6 +72,10 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         void onItemClick(Beer beer);
     }
 
+    public interface OnBottomReachedListener {
+        void onBottomReached(int position);
+    }
+
     public void add(int position, Beer item) {
         beers.add(position, item);
         notifyItemInserted(position);
@@ -102,12 +106,6 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         final Beer beer = beers.get(position);
 
         holder.txtBeerName.setText(beer.getName());
-        holder.txtBeerName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // remove(position);
-            }
-        });
 
         holder.txtBeerTagline.setText(beer.getTagline());
 
@@ -122,6 +120,10 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
                     .load(beer.getImageUrl())
                     .into(holder.icon);
         }
+
+        if (position == beers.size() - 1) {
+            onBottomReachedListener.onBottomReached(position);
+        }
     }
 
     @Override
@@ -129,4 +131,7 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         return beers.size();
     }
 
+    public List<Beer> getBeers() {
+        return beers;
+    }
 }

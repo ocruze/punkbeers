@@ -25,7 +25,7 @@ import com.ocruze.punkbeers.presentation.model.beer.Beer;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements BeerListAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements BeerListAdapter.OnItemClickListener, BeerListAdapter.OnBottomReachedListener {
 
     private RecyclerView recyclerView;
     private BeerListAdapter beerListAdapter;
@@ -81,13 +81,27 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        beerListAdapter = new BeerListAdapter(beers, this, getApplicationContext());
+        beerListAdapter = new BeerListAdapter(beers, this, this, getApplicationContext());
         recyclerView.setAdapter(beerListAdapter);
+    }
+
+    public void updateList(List<Beer> beers) {
+        if (beers != null && recyclerView != null) {
+            int oldSize = beerListAdapter.getBeers().size();
+            beerListAdapter.getBeers().addAll(beers);
+            recyclerView.setAdapter(beerListAdapter);
+            recyclerView.scrollToPosition(oldSize - 5);
+        }
     }
 
     @Override
     public void onItemClick(Beer beer) {
         controller.onItemClick(beer);
+    }
+
+    @Override
+    public void onBottomReached(int position) {
+        controller.onBottomReached(position);
     }
 
     public void navigateToDetails(Beer beer) {
@@ -120,6 +134,5 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
 
         return super.onOptionsItemSelected(item);
     }
-
 
 }
