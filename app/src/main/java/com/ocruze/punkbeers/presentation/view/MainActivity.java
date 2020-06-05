@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         });
 
         // non-view related
-        controller = new MainController(this, Singletons.getSharedPreferences(this), Singletons.getGson());
+        controller = new MainController(this, Singletons.getGson(), Singletons.getPunkRepository(this));
         controller.onStart();
     }
 

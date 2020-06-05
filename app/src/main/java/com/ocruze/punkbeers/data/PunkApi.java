@@ -10,7 +10,10 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface PunkApi {
-    final static String BASE_URI = "https://api.punkapi.com/v2/";
+    String BASE_URI = "https://api.punkapi.com/v2/";
+
+    @GET("beers/")
+    Call<List<Beer>> getBeers();
 
     @GET("beers/")
     Call<List<Beer>> getBeers(@Query("page") int page);

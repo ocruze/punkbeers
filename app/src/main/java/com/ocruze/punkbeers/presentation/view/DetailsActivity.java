@@ -134,11 +134,11 @@ public class DetailsActivity extends AppCompatActivity {
             tableHops.addView(tr);
         }
 
-        volume.setText("Volume: " + String.valueOf(beer.getVolume()));
-        boilVolume.setText("Boil volume: " + String.valueOf(beer.getBoilVolume()));
+        volume.setText("Volume: " + beer.getVolume());
+        boilVolume.setText("Boil volume: " + beer.getBoilVolume());
 
-        tempMash.setText("Mash temperature: " + String.valueOf(beer.getMethod().getMashTemp().getTemperature()));
-        tempFermentation.setText("Fermentation temperature: " + String.valueOf(beer.getMethod().getFermentation().getTemperature()));
+        tempMash.setText("Mash temperature: " + beer.getMethod().getMashTemp().getTemperature());
+        tempFermentation.setText("Fermentation temperature: " + beer.getMethod().getFermentation().getTemperature());
 
         yeast.setText("Yeast: " + beer.getIngredients().getYeast());
 

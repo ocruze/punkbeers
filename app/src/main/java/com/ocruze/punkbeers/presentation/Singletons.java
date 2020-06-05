@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ocruze.punkbeers.data.PunkApi;
+import com.ocruze.punkbeers.data.PunkRepository;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -15,6 +16,7 @@ public class Singletons {
     private static Gson gsonInstance;
     private static PunkApi punkApiInstance;
     private static SharedPreferences sharedPreferencesInstance;
+    private static PunkRepository punkRepositoryInstance;
 
     public static Gson getGson() {
         if (gsonInstance == null)
@@ -39,5 +41,12 @@ public class Singletons {
         if (sharedPreferencesInstance == null)
             sharedPreferencesInstance = context.getApplicationContext().getSharedPreferences(Constants.APP_PREFS_KEY, Context.MODE_PRIVATE);
         return sharedPreferencesInstance;
+    }
+
+    public static PunkRepository getPunkRepository(Context context) {
+        if (punkRepositoryInstance == null) {
+            punkRepositoryInstance = new PunkRepository(getPunkApi(), getSharedPreferences(context), getGson());
+        }
+        return punkRepositoryInstance;
     }
 }
