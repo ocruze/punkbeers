@@ -30,12 +30,14 @@ https://github.com/ocruze/punkbeers.git
 ## Fonctionnalités
 
 ### Ecran principal
-![Ecran principal](doc/img/beers_list_screen.jpg)
+
+<img src="doc/img/beers_list_screen.jpg" alt="Ecran principal" width="400">
 
 ### Ecran de détail de la bière
-![Ecran de détail](doc/img/beer_details_screen.jpg)
 
-# Source
+<img src="doc/img/beer_details_screen.jpg" alt="Ecran de détail de la bière" width="400">
+
+# Source de données
 
 API utilisée par cette appli : [PunkApi](https://punkapi.com/)
 ```
