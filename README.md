@@ -27,7 +27,7 @@ https://github.com/ocruze/punkbeers.git
 * Gitflow
 * Intégration continue
 * Fonctionnalités supplémentaires :
-    * Ecran aide avec l'explication de certains termes techniques
+    * Ecran aide avec l'explication de quelques termes techniques
     * Chargement dynamique des éléments de la liste
 
 ## Fonctionnalités
@@ -45,7 +45,11 @@ https://github.com/ocruze/punkbeers.git
 <img src="doc/img/help_page.jpg" alt="Ecran aide" width="400">
 
 ## Développeur
-Orka `Arnest` CRUZE
+Orka `Arnest` CRUZE,
+
+o.cruze@live.com
+
+cruze@et.esiea.fr
 
 3A-UFA-Paris, ESIEA.
 

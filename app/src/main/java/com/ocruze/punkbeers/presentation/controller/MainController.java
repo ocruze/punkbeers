@@ -29,8 +29,10 @@ public class MainController {
     }
 
     public void onStart() {
+        page = 1;
+
         if (isConnectedToInternet()) {
-            repository.getPunkResponse(new PunkCallback() {
+            repository.getBeers(new PunkCallback() {
                 @Override
                 public void onSuccess(List<Beer> beers) {
                     view.showList(beers);
@@ -67,7 +69,7 @@ public class MainController {
 
         page++;
         if (isConnectedToInternet()) {
-            repository.getPunkResponse(new PunkCallback() {
+            repository.getBeers(new PunkCallback() {
                 @Override
                 public void onSuccess(List<Beer> beers) {
                     view.updateList(beers);
@@ -83,4 +85,21 @@ public class MainController {
     }
 
 
+    public void searchByName(String beerName) {
+        if (!isConnectedToInternet()) {
+            Util.showToast(view, "Not connected to the internet");
+        } else {
+            repository.getBeerByName(new PunkCallback() {
+                @Override
+                public void onSuccess(List<Beer> beers) {
+                    view.showSearchResults(beers);
+                }
+
+                @Override
+                public void onFailure() {
+                    Util.showToast(view.getApplicationContext(), "API Error");
+                }
+            }, beerName);
+        }
+    }
 }
