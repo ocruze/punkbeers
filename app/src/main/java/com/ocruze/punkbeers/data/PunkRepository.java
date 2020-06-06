@@ -25,12 +25,30 @@ public class PunkRepository {
         this.gson = gson;
     }
 
-    public void getPunkResponse(final PunkCallback callback) {
-        getPunkResponse(callback);
+    public void getBeers(final PunkCallback callback) {
+        getBeers(callback);
     }
 
-    public void getPunkResponse(final PunkCallback callback, int page) {
+    public void getBeers(final PunkCallback callback, int page) {
         punkApi.getBeers(page).enqueue(new Callback<List<Beer>>() {
+            @Override
+            public void onResponse(Call<List<Beer>> call, Response<List<Beer>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Beer>> call, Throwable t) {
+                callback.onFailure();
+            }
+        });
+    }
+
+    public void getBeerByName(final PunkCallback callback, String beerName) {
+        punkApi.getBeerByName(beerName).enqueue(new Callback<List<Beer>>() {
             @Override
             public void onResponse(Call<List<Beer>> call, Response<List<Beer>> response) {
                 if (response.isSuccessful() && response.body() != null) {

@@ -86,6 +86,10 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         notifyItemRemoved(position);
     }
 
+    public void setData(List<Beer> beers) {
+        this.beers = beers;
+    }
+
     // Create new views (invoked by the layout manager)
     @NonNull
     @Override
@@ -114,7 +118,7 @@ public class BeerListAdapter extends RecyclerView.Adapter<BeerListAdapter.ViewHo
         holder.txtBeerEbc.setText(beer.getEbc() + "");
         holder.txtBeerSrm.setText(beer.getSrm() + "");
 
-        if (!beer.getImageUrl().equals(Constants.DEFAULT_BEER_IMG_URL)) {
+        if (beer != null && beer.getImageUrl() != null && !beer.getImageUrl().equals(Constants.DEFAULT_BEER_IMG_URL)) {
             Glide
                     .with(this.context)
                     .load(beer.getImageUrl())

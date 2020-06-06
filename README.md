@@ -27,25 +27,39 @@ https://github.com/ocruze/punkbeers.git
 * Gitflow
 * Intégration continue
 * Fonctionnalités supplémentaires :
-    * Ecran aide avec l'explication de certains termes techniques
+    * Ecran aide avec l'explication de quelques termes techniques
     * Chargement dynamique des éléments de la liste
+    * Barre de recherche
+    * Fond d'écran animé
 
 ## Fonctionnalités
 
+### Ecran splash
+
+<img src="doc/img/splash.png" alt="Ecran splash" width="400">
+
 ### Ecran principal
 
-<img src="doc/img/beers_list_screen.jpg" alt="Ecran principal" width="400">
+<img src="doc/img/beers_list_screen.png" alt="Ecran principal" width="400">
 
 ### Ecran de détail de la bière
 
-<img src="doc/img/beer_details_screen.jpg" alt="Ecran de détail de la bière" width="400">
+<img src="doc/img/beer_details_screen.png" alt="Ecran de détail de la bière" width="400">
+
+### Ecran recherche
+
+<img src="doc/img/search_view.png" alt="Ecran recherche" width="400">
 
 ### Ecran aide
 
-<img src="doc/img/help_page.jpg" alt="Ecran aide" width="400">
+<img src="doc/img/help_page.png" alt="Ecran aide" width="400">
 
 ## Développeur
-Orka `Arnest` CRUZE
+Orka `Arnest` CRUZE,
+
+o.cruze@live.com
+
+cruze@et.esiea.fr
 
 3A-UFA-Paris, ESIEA.
 

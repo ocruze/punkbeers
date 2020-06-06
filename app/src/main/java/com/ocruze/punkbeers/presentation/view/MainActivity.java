@@ -6,6 +6,9 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ConstraintLayout constraintLayout = findViewById(R.id.main_activity_layout);
@@ -48,13 +51,6 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         // non-view related
         controller = new MainController(this, Singletons.getGson(), Singletons.getPunkRepository(this));
         controller.onStart();
-    }
-
-    public void gradientAnimation(ConstraintLayout layout) {
-        AnimationDrawable animationDrawable = (AnimationDrawable) layout.getBackground();
-        animationDrawable.setEnterFadeDuration(4500);
-        animationDrawable.setExitFadeDuration(4500);
-        animationDrawable.start();
     }
 
     public void showList(List<Beer> beers) {
@@ -77,14 +73,11 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         }
     }
 
-    @Override
-    public void onItemClick(Beer beer) {
-        controller.onItemClick(beer);
-    }
-
-    @Override
-    public void onBottomReached(int position) {
-        controller.onBottomReached();
+    public void showSearchResults(List<Beer> beers) {
+        if (beers != null && recyclerView != null) {
+            beerListAdapter.setData(beers);
+            recyclerView.setAdapter(beerListAdapter);
+        }
     }
 
     public void navigateToDetails(Beer beer) {
@@ -96,8 +89,54 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
     }
 
     @Override
+    public void onItemClick(Beer beer) {
+        controller.onItemClick(beer);
+    }
+
+    @Override
+    public void onBottomReached(int position) {
+        controller.onBottomReached();
+    }
+
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.search_icon);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Type a beer's name");
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                controller.searchByName(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.length() < 4)
+                    return true;
+
+                controller.searchByName(newText);
+                return false;
+            }
+        });
+
+        searchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View v) {
+                return;
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+                controller.onStart();
+            }
+        });
+
         return true;
     }
 
@@ -114,5 +153,6 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }
