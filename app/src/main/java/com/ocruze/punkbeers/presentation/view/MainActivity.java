@@ -6,7 +6,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,8 +13,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.ocruze.punkbeers.R;
 import com.ocruze.punkbeers.presentation.Constants;
 import com.ocruze.punkbeers.presentation.Singletons;
@@ -25,7 +22,7 @@ import com.ocruze.punkbeers.presentation.model.beer.Beer;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements BeerListAdapter.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements BeerListAdapter.OnItemClickListener, BeerListAdapter.OnBottomReachedListener {
 
     private RecyclerView recyclerView;
     private BeerListAdapter beerListAdapter;
@@ -43,27 +40,14 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton next = findViewById(R.id.btn_next);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Snackbar.make(view, "Next button action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        FloatingActionButton previous = findViewById(R.id.btn_previous);
-        previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Previous button action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        ConstraintLayout constraintLayout = findViewById(R.id.main_activity_layout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground() ;
+        animationDrawable.setEnterFadeDuration(Constants.ANIMATION_DURATION);
+        animationDrawable.setExitFadeDuration(Constants.ANIMATION_DURATION);
+        animationDrawable.start();
 
         // non-view related
-        controller = new MainController(this, Singletons.getSharedPreferences(this), Singletons.getGson());
+        controller = new MainController(this, Singletons.getGson(), Singletons.getPunkRepository(this));
         controller.onStart();
     }
 
@@ -81,13 +65,27 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        beerListAdapter = new BeerListAdapter(beers, this, getApplicationContext());
+        beerListAdapter = new BeerListAdapter(beers, this, this, getApplicationContext());
         recyclerView.setAdapter(beerListAdapter);
+    }
+
+    public void updateList(List<Beer> beers) {
+        if (beers != null && recyclerView != null) {
+            int oldSize = beerListAdapter.getBeers().size();
+            beerListAdapter.getBeers().addAll(beers);
+            recyclerView.setAdapter(beerListAdapter);
+            recyclerView.scrollToPosition(oldSize - 5);
+        }
     }
 
     @Override
     public void onItemClick(Beer beer) {
         controller.onItemClick(beer);
+    }
+
+    @Override
+    public void onBottomReached(int position) {
+        controller.onBottomReached(position);
     }
 
     public void navigateToDetails(Beer beer) {
@@ -120,6 +118,5 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
 
         return super.onOptionsItemSelected(item);
     }
-
 
 }
