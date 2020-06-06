@@ -17,7 +17,6 @@ import com.ocruze.punkbeers.R;
 import com.ocruze.punkbeers.presentation.Constants;
 import com.ocruze.punkbeers.presentation.Singletons;
 import com.ocruze.punkbeers.presentation.controller.MainController;
-import com.ocruze.punkbeers.presentation.model.Util;
 import com.ocruze.punkbeers.presentation.model.beer.Beer;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
         setSupportActionBar(toolbar);
 
         ConstraintLayout constraintLayout = findViewById(R.id.main_activity_layout);
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground() ;
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
         animationDrawable.setEnterFadeDuration(Constants.ANIMATION_DURATION);
         animationDrawable.setExitFadeDuration(Constants.ANIMATION_DURATION);
         animationDrawable.start();
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
 
     @Override
     public void onBottomReached(int position) {
-        controller.onBottomReached(position);
+        controller.onBottomReached();
     }
 
     public void navigateToDetails(Beer beer) {
@@ -98,21 +97,18 @@ public class MainActivity extends AppCompatActivity implements BeerListAdapter.O
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Util.showToast(getApplicationContext(), "Clicked on settings");
+        if (id == R.id.action_help) {
+            Intent helpIntent = new Intent(this, HelpActivity.class);
+            startActivity(helpIntent);
+
             return true;
         }
 

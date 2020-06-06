@@ -43,7 +43,7 @@ public class MainController {
                 }
             }, page);
         } else {
-            repository.loadDataFromCache();
+            view.showList(repository.loadDataFromCache());
         }
     }
 
@@ -60,10 +60,7 @@ public class MainController {
         view.navigateToDetails(beer);
     }
 
-    public void onBottomReached(int position) {
-        /*int currentPage = ((position + 1) % PunkApi.RESULTS_PER_PAGE) + 1;
-        System.out.println("bottom reached " + position);
-        System.out.println("current page " + currentPage);*/
+    public void onBottomReached() {
         if (page > PunkApi.MAXIMUM_PAGE) {
             return;
         }
@@ -73,7 +70,6 @@ public class MainController {
             repository.getPunkResponse(new PunkCallback() {
                 @Override
                 public void onSuccess(List<Beer> beers) {
-                    // view.showList(beers);
                     view.updateList(beers);
                     repository.saveList(beers);
                 }
@@ -86,8 +82,5 @@ public class MainController {
         }
     }
 
-    public void onButtonClick() {
-
-    }
 
 }

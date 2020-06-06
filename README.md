@@ -5,7 +5,7 @@
 ## Présentation
 Développement d'une application Android en Java for Android.
 
-L'application est un répertoire de recettes de bières.
+Cette application est un recueil de recettes de bières.
 
 ## Prérequis
 * Android Studio
@@ -26,6 +26,9 @@ https://github.com/ocruze/punkbeers.git
     * Ecran détail affichant le détail d'une bière
 * Gitflow
 * Intégration continue
+* Fonctionnalités supplémentaires :
+    * Ecran aide avec l'explication de certains termes techniques
+    * Chargement dynamique des éléments de la liste
 
 ## Fonctionnalités
 
@@ -37,7 +40,16 @@ https://github.com/ocruze/punkbeers.git
 
 <img src="doc/img/beer_details_screen.jpg" alt="Ecran de détail de la bière" width="400">
 
-# Source de données
+### Ecran aide
+
+<img src="doc/img/help_page.jpg" alt="Ecran aide" width="400">
+
+## Développeur
+Orka `Arnest` CRUZE
+
+3A-UFA-Paris, ESIEA.
+
+## Source de données
 
 API utilisée par cette appli : [PunkApi](https://punkapi.com/)
 ```
