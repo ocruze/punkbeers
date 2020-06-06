@@ -28,5 +28,16 @@ https://github.com/ocruze/punkbeers.git
 * Intégration continue
 
 ## Fonctionnalités
-### Ecran principal
 
+### Ecran principal
+![Ecran principal](doc/img/beers_list_screen.jpg)
+
+### Ecran de détail de la bière
+![Ecran de détail](doc/img/beer_details_screen.jpg)
+
+# Source
+
+API utilisée par cette appli : [PunkApi](https://punkapi.com/)
+```
+https://github.com/samjbmason/punkapi
+```
