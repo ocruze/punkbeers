@@ -1,4 +1,4 @@
-# punkbeers
+# punkbeers 🍺
 
 ![build](https://github.com/ocruze/punkbeers/workflows/Android%20CI/badge.svg)
 
@@ -31,8 +31,14 @@ https://github.com/ocruze/punkbeers.git
     * Chargement dynamique des éléments de la liste
     * Barre de recherche
     * Fond d'écran animé
+    * Icône de lanceur
+    * Ecran splash
 
 ## Fonctionnalités
+
+### Icône de lanceur
+
+<img src="doc/img/launcher_icon.png" alt="Ecran splash" width="80">
 
 ### Ecran splash
 
