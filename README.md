@@ -42,7 +42,7 @@ https://github.com/ocruze/punkbeers.git
 
 ### Ecran splash
 
-Cet écran est affiché pendant que l'application se charge
+Cet écran est affiché pendant que l'application se charge.
 
 <img src="doc/img/splash.png" alt="Ecran splash" width="400">
 
@@ -62,7 +62,7 @@ Quand on clique sur un élément de la liste, en l'occurence une bière, l'appli
 
 ### Ecran recherche
 
-L'écran principal propose de rechercher des bières par son nom. Il suffit juste de cliquer sur le bouton rechercher sur la barre d'outils affichée en haut de l'écran et y taper le nom de la bière. Une connexion à internet est nécessaire pour cette fonctionnalité bien évidemment.
+L'écran principal propose de rechercher une bière par son nom. Il suffit juste de cliquer sur le bouton rechercher sur la barre d'outils affichée en haut de l'écran et y taper le nom de la bière. Une connexion à internet est nécessaire pour cette fonctionnalité bien évidemment.
 
 <img src="doc/img/search_view.png" alt="Ecran recherche" width="400">
 
